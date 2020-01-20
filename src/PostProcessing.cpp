@@ -34,7 +34,7 @@
 
 namespace itg
 {
-    void PostProcessing::init(unsigned width, unsigned height, bool arb)
+    void PostProcessing::init(unsigned width, unsigned height, bool arb, int numSamples)
     {
         this->width = width;
         this->height = height;
@@ -55,6 +55,7 @@ namespace itg
             s.textureTarget = GL_TEXTURE_2D;
         }
         
+        
         // no need to use depth for ping pongs
         for (int i = 0; i < 2; ++i)
         {
@@ -64,6 +65,7 @@ namespace itg
         s.useDepth = true;
         s.depthStencilInternalFormat = GL_DEPTH_COMPONENT24;
         s.depthStencilAsTexture = true;
+        s.numSamples = numSamples;
         raw.allocate(s);
         
         numProcessedPasses = 0;
